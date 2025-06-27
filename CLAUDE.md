@@ -58,25 +58,49 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   - `fix/修正内容` - バグ修正  
   - `update/更新内容` - 既存機能の改善
 
-### 開発ワークフロー
-1. **作業開始前**: 必ず新しいブランチを作成
+### 開発ワークフロー（厳守）
+**⚠️ 重要: 以下の手順を必ず順番通りに実行すること**
+
+1. **mainブランチを最新状態に更新**
+   ```bash
+   git checkout main
+   git pull origin main
+   ```
+
+2. **mainから新しいブランチを作成**
    ```bash
    git checkout -b feature/新機能名
    ```
-2. **開発・テスト**: ブランチ上で開発とビルド確認
-3. **プルリク前のリベース**: mainの最新状態に合わせる
+
+3. **開発・テスト**: ブランチ上で開発とビルド確認
+   ```bash
+   npm run build  # ビルドエラーがないことを確認
+   ```
+
+4. **プッシュ前のリベース**: mainの最新状態に合わせる
    ```bash
    git pull --rebase origin main
    ```
-4. **プッシュとPR作成**: GitHubにプッシュしてPull Request作成
+
+5. **プッシュとPR作成**: GitHubにプッシュしてPull Request作成
    ```bash
    git push -u origin feature/新機能名
+   # またはリベース後は
+   git push --force-with-lease origin feature/新機能名
    ```
 
 ### 重要な注意事項
+- **mainブランチから作業開始**: 作業前に必ずmainを最新にしてからブランチを作成
+- **リベース必須**: プッシュ前に必ず `git pull --rebase origin main` を実行
 - **直接mainブランチでの作業禁止**: 必ずブランチを切る
 - **ビルド確認必須**: `npm run build` でエラーがないことを確認
 - **自動デプロイ**: mainへのマージで本番サイトに即座に反映
+
+### 🚫 やってはいけないパターン
+- mainを最新にせずにブランチを作成する
+- 他のブランチから新しいブランチを作成する
+- プッシュ前にリベースを行わない
+- ビルド確認をせずにプッシュする
 
 ## ブログ機能（マークダウン投稿）
 
