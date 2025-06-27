@@ -1,11 +1,56 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+// 動的変数の定義
+const pageTitle = "About - engineer journey";
+
+const identity = {
+  name: "エンジニア",
+  role: "ソフトウェア開発者",
+  passion: "学習と成長"
+};
+
+const skills = [
+  "JavaScript/TypeScript",
+  "React/Next.js", 
+  "Node.js",
+  "Python",
+  "Git/GitHub",
+  "Astro",
+  "Web開発"
+];
+
+const learningGoals = [
+  "モダンなWeb開発技術の習得",
+  "クリーンコードの実践",
+  "DevOpsとインフラの理解",
+  "オープンソース貢献"
+];
+
+const currentFocus = "Astroを使ったブログサイト構築";
+const isLearning = true;
 ---
 
-<Layout title="About - engineer journey">
+<Layout title={pageTitle}>
 	<h1>About engineer journey</h1>
 	<p>このサイトはエンジニアの学習と開発の記録を目的としたブログサイトです。</p>
 	<p>技術的な学びや開発の過程を記録し、知識の蓄積と共有を行っています。</p>
+	
+	<h2>私について</h2>
+	<p>こんにちは！私は<strong>{identity.name}</strong>として活動している<strong>{identity.role}</strong>です。</p>
+	<p>特に<strong>{identity.passion}</strong>に情熱を注いでいます。</p>
+	
+	{isLearning && <p>🌱 現在は「<strong>{currentFocus}</strong>」に集中して取り組んでいます。</p>}
+	
+	<h2>技術スキル</h2>
+	<ul>
+		{skills.map((skill) => <li>{skill}</li>)}
+	</ul>
+	
+	<h2>学習目標</h2>
+	<ul>
+		{learningGoals.map((goal) => <li>{goal}</li>)}
+	</ul>
 	
 	<h2>サイトについて</h2>
 	<ul>
