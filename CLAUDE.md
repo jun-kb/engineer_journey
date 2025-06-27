@@ -22,15 +22,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ├── public/           # 静的アセット（画像、favicon等）
 ├── src/
 │   ├── layouts/     # レイアウトコンポーネント
-│   │   ├── Layout.astro                # 基本レイアウト
-│   │   └── MarkdownPostLayout.astro    # マークダウン投稿用レイアウト
+│   │   ├── Layout.astro                # 基本レイアウト（Tailwind CSS適用済み）
+│   │   └── MarkdownPostLayout.astro    # マークダウン投稿用レイアウト（Tailwind CSS適用済み）
 │   └── pages/       # Astroページファイル（.astro、.md形式）
-│       ├── index.astro     # ルートページ
+│       ├── index.astro     # ルートページ（Tailwind CSS適用済み）
 │       ├── about.astro     # Aboutページ（Astroの動的機能を活用）
 │       └── posts/          # ブログ投稿（マークダウン）
 │           ├── first-development-journey.md      # 初回開発記録
 │           └── astro-dynamic-features.md         # Astro動的機能記録
-├── astro.config.mjs # Astro設定ファイル
+├── astro.config.mjs # Astro設定ファイル（Tailwind統合設定済み）
+├── tailwind.config.js # Tailwind CSS設定ファイル
 ├── tsconfig.json    # TypeScript設定（astro/tsconfigs/strictを継承）
 └── package.json     # プロジェクト依存関係
 ```
@@ -41,6 +42,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **言語**: TypeScript（strictモード）
 - **ページルーティング**: ファイルベースルーティング（src/pages/）
 - **コンテンツ管理**: Markdown + フロントマター（ブログ投稿用）
+- **スタイリング**: Tailwind CSS 3.4.17（Astro統合）
 
 ## デプロイメント
 
@@ -200,6 +202,26 @@ const isLearning = true;
 </ul>
 ```
 
+## Tailwind CSS統合
+
+### 設定概要
+- **統合パッケージ**: `@astrojs/tailwind` 6.0.2
+- **Tailwind CSS**: `tailwindcss` 3.4.17
+- **設定ファイル**: `tailwind.config.js`（コンテンツパス設定済み）
+- **Astro統合**: `astro.config.mjs`に統合設定済み
+
+### デザインシステム
+- **カラーパレット**: 青・紫のグラデーション、グレースケール
+- **タイポグラフィ**: レスポンシブテキストサイズ、適切な行間
+- **レイアウト**: モバイルファーストのレスポンシブデザイン
+- **コンポーネント**: カード型レイアウト、ホバーエフェクト、SVGアイコン
+
+### スタイル適用状況
+- **基本レイアウト**: `Layout.astro` - ベースタイポグラフィとカラー
+- **トップページ**: `index.astro` - グラデーションヘッダー、カード型ブログリスト
+- **投稿ページ**: `MarkdownPostLayout.astro` - アイコン付きメタデータ、プロース対応
+- **レスポンシブ**: 全ページでモバイル・タブレット・デスクトップ対応
+
 ## 開発時の注意点
 
 - **Astroページ**: `src/pages/` ディレクトリに `.astro` 形式で作成
@@ -209,3 +231,4 @@ const isLearning = true;
 - **TypeScript**: strict モードで設定済み
 - **コンポーネント**: `src/components/` に配置することを推奨（現在は未作成）
 - **動的機能**: フロントマターでのJavaScript活用を積極的に行う
+- **スタイリング**: Tailwind CSSクラスを使用（カスタムCSSは最小限に）
