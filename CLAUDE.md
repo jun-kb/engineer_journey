@@ -28,7 +28,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 │       ├── index.astro     # ルートページ
 │       ├── about.astro     # Aboutページ（Astroの動的機能を活用）
 │       └── posts/          # ブログ投稿（マークダウン）
-│           └── first-development-journey.md
+│           ├── first-development-journey.md      # 初回開発記録
+│           └── astro-dynamic-features.md         # Astro動的機能記録
 ├── astro.config.mjs # Astro設定ファイル
 ├── tsconfig.json    # TypeScript設定（astro/tsconfigs/strictを継承）
 └── package.json     # プロジェクト依存関係
@@ -131,9 +132,45 @@ tags: ["tag1", "tag2", "tag3"]
 
 ### 既存の投稿
 
+- **Astro動的機能**: `/posts/astro-dynamic-features` - Astroの動的機能を活用したAboutページ改善記録
 - **開発記録**: `/posts/first-development-journey` - プロジェクトの開発プロセスをまとめた最初の投稿
 
 ## Astroの動的機能活用
+
+### トップページの動的ブログリスト機能
+
+`src/pages/index.astro` では以下の動的機能を実装：
+
+- **自動投稿取得**: `import.meta.glob()` を使用してブログ投稿を自動取得
+- **日付ソート**: 公開日による降順ソート（最新投稿が上位表示）
+- **動的リスト表示**: 投稿の追加で自動的にトップページに反映
+- **メタデータ表示**: タイトル、説明、公開日、タグの自動表示
+
+#### 実装パターン
+```astro
+---
+// すべてのブログ投稿を取得
+const posts = import.meta.glob('./posts/*.md', { eager: true });
+const allPosts = Object.values(posts);
+
+// 公開日で降順ソート（最新が上位）
+const sortedPosts = allPosts.sort((a, b) => {
+  return new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime();
+});
+---
+
+<!-- 動的投稿リスト -->
+{sortedPosts.map((post) => (
+  <article>
+    <h3><a href={post.url}>{post.frontmatter.title}</a></h3>
+    <p>{post.frontmatter.description}</p>
+    <!-- タグ表示 -->
+    {post.frontmatter.tags.map((tag) => (
+      <span class="tag">{tag}</span>
+    ))}
+  </article>
+))}
+```
 
 ### Aboutページの実装例
 `src/pages/about.astro` では以下のAstroの動的機能を活用：
