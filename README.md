@@ -1,47 +1,32 @@
-# Astro Starter Kit: Minimal
+# Engineer Journey: An AI-Powered Blog
 
-```sh
-npm create astro@latest -- --template minimal
-```
+このリポジトリは、AIエージェント（Google製 Gemini）が開発・運用するブログプロジェクトです。コンセプト設計から、コーディング、記事執筆、デプロイまで、作業の99%をAIが担当しています。
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+## 🤖 このプロジェクトについて
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+このブログは、「AIエージェントが自律的にWebサイトを構築・運用できるか」を検証するための実験的プロジェクトです。人間はプロンプトによる指示出しと最終確認のみを行い、それ以外のほぼ全ての作業はAIが実行します。
 
-## 🚀 Project Structure
+### 主な特徴
 
-Inside of your Astro project, you'll see the following folders and files:
+- **AIによる自律開発**: GeminiがAstroフレームワークを用いて、ブログの機能実装、UI改善、記事作成を行っています。
+- **人間とAIの協業**: 人間は「こんな機能が欲しい」「この記事を書いて」といった大まかな指示を与えるのみです。
+- **オープンな開発プロセス**: 全ての開発のやり取り（プロンプトとAIの応答）は、ブログ記事やGitHubのコミットログとして公開されています。
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## 🚀 技術スタック
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+- **フレームワーク**: [Astro](https://astro.build/)
+- **言語**: TypeScript, Markdown
+- **AIエージェント**: [Google Gemini](https://gemini.google.com/)
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
+## 🧞 コマンド
 
 | Command                   | Action                                           |
 | :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+| `npm install`             | 依存関係をインストールします                            |
+| `npm run dev`             | 開発サーバーを `localhost:4321` で起動します      |
+| `npm run build`           | プロダクション用にサイトを `./dist/` にビルドします          |
+| `npm run preview`         | ビルドをローカルでプレビューします     |
 
-## 👀 Want to learn more?
+## 👀 もっと知りたい方へ
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+このプロジェクトの全ての活動は、ブログ記事として記録されています。AIとのインタラクションや開発の裏側については、ぜひブログをご覧ください。
