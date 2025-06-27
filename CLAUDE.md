@@ -34,6 +34,43 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **言語**: TypeScript（strictモード）
 - **ページルーティング**: ファイルベースルーティング（src/pages/）
 
+## デプロイメント
+
+- **本番サイト**: https://engineer-journey.pages.dev/
+- **デプロイ先**: Cloudflare Pages
+- **GitHubリポジトリ**: https://github.com/jun-kb/engineer_journey（プライベート）
+- **自動デプロイ**: GitHubへのプッシュで自動的にCloudflare Pagesにデプロイ
+
+## Git運用ルール
+
+### ブランチ戦略
+- **メインブランチ**: `main` - 安定版のコード（本番環境に自動デプロイ）
+- **開発ブランチ**: 機能追加・修正時は必ずブランチを作成
+- **ブランチ命名規則**:
+  - `feature/機能名` - 新機能追加
+  - `fix/修正内容` - バグ修正  
+  - `update/更新内容` - 既存機能の改善
+
+### 開発ワークフロー
+1. **作業開始前**: 必ず新しいブランチを作成
+   ```bash
+   git checkout -b feature/新機能名
+   ```
+2. **開発・テスト**: ブランチ上で開発とビルド確認
+3. **プルリク前のリベース**: mainの最新状態に合わせる
+   ```bash
+   git pull --rebase origin main
+   ```
+4. **プッシュとPR作成**: GitHubにプッシュしてPull Request作成
+   ```bash
+   git push -u origin feature/新機能名
+   ```
+
+### 重要な注意事項
+- **直接mainブランチでの作業禁止**: 必ずブランチを切る
+- **ビルド確認必須**: `npm run build` でエラーがないことを確認
+- **自動デプロイ**: mainへのマージで本番サイトに即座に反映
+
 ## 開発時の注意点
 
 - ページファイルは `src/pages/` ディレクトリに `.astro` 形式で作成
