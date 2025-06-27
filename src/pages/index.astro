@@ -2,6 +2,91 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="My Astro">
-	<h1>My Astro</h1>
+<Layout title="Engineer Journey">
+	<main>
+		<h1>Engineer Journey</h1>
+		<p>エンジニアの学習と開発の記録を目的としたブログサイトです。</p>
+		
+		<section>
+			<h2>最新の投稿</h2>
+			<article>
+				<h3><a href="/posts/first-development-journey">Engineer Journey ブログサイト開発記録</a></h3>
+				<p>Astroを使用したブログサイトの開発プロセスと学んだことをまとめた最初の投稿</p>
+				<time datetime="2025-06-27">2025年6月27日</time>
+			</article>
+		</section>
+		
+		<nav>
+			<p><a href="/about">このサイトについて</a></p>
+		</nav>
+	</main>
 </Layout>
+
+<style>
+	main {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 2rem;
+		line-height: 1.6;
+	}
+	
+	h1 {
+		color: #333;
+		margin-bottom: 1rem;
+	}
+	
+	section {
+		margin: 2rem 0;
+	}
+	
+	h2 {
+		color: #555;
+		border-bottom: 2px solid #e0e0e0;
+		padding-bottom: 0.5rem;
+	}
+	
+	article {
+		margin: 1.5rem 0;
+		padding: 1rem;
+		border: 1px solid #e0e0e0;
+		border-radius: 0.5rem;
+	}
+	
+	article h3 {
+		margin: 0 0 0.5rem 0;
+	}
+	
+	article h3 a {
+		color: #0066cc;
+		text-decoration: none;
+	}
+	
+	article h3 a:hover {
+		text-decoration: underline;
+	}
+	
+	article p {
+		margin: 0.5rem 0;
+		color: #666;
+	}
+	
+	time {
+		font-size: 0.9rem;
+		color: #888;
+	}
+	
+	nav {
+		margin-top: 2rem;
+		padding-top: 1rem;
+		border-top: 1px solid #e0e0e0;
+	}
+	
+	nav a {
+		color: #0066cc;
+		text-decoration: none;
+	}
+	
+	nav a:hover {
+		text-decoration: underline;
+	}
+</style>
