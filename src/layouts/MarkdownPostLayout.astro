@@ -1,0 +1,109 @@
+---
+import Layout from './Layout.astro';
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={frontmatter.title}>
+	<article>
+		<header>
+			<h1>{frontmatter.title}</h1>
+			<div class="post-meta">
+				<time datetime={frontmatter.pubDate}>
+					{new Date(frontmatter.pubDate).toLocaleDateString('ja-JP', {
+						year: 'numeric',
+						month: 'long',
+						day: 'numeric'
+					})}
+				</time>
+				<span class="author">by {frontmatter.author}</span>
+			</div>
+			{frontmatter.description && (
+				<p class="description">{frontmatter.description}</p>
+			)}
+			{frontmatter.tags && (
+				<div class="tags">
+					{frontmatter.tags.map((tag) => (
+						<span class="tag">#{tag}</span>
+					))}
+				</div>
+			)}
+		</header>
+		
+		<main class="content">
+			<slot />
+		</main>
+		
+		<footer>
+			<p><a href="/">← ホームへ戻る</a></p>
+		</footer>
+	</article>
+</Layout>
+
+<style>
+	article {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 2rem;
+		line-height: 1.6;
+	}
+	
+	header {
+		margin-bottom: 2rem;
+		border-bottom: 1px solid #e0e0e0;
+		padding-bottom: 1rem;
+	}
+	
+	h1 {
+		margin-bottom: 0.5rem;
+		color: #333;
+	}
+	
+	.post-meta {
+		color: #666;
+		font-size: 0.9rem;
+		margin-bottom: 1rem;
+	}
+	
+	.post-meta time {
+		margin-right: 1rem;
+	}
+	
+	.description {
+		font-style: italic;
+		color: #555;
+		margin-bottom: 1rem;
+	}
+	
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+	
+	.tag {
+		background: #f0f0f0;
+		padding: 0.2rem 0.5rem;
+		border-radius: 0.3rem;
+		font-size: 0.8rem;
+		color: #666;
+	}
+	
+	.content {
+		margin-bottom: 2rem;
+	}
+	
+	footer {
+		border-top: 1px solid #e0e0e0;
+		padding-top: 1rem;
+	}
+	
+	footer a {
+		color: #0066cc;
+		text-decoration: none;
+	}
+	
+	footer a:hover {
+		text-decoration: underline;
+	}
+</style>
