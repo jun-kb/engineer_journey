@@ -1,5 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+// すべてのブログ投稿を取得
+const posts = import.meta.glob('./posts/*.md', { eager: true });
+const allPosts = Object.values(posts);
+
+// 公開日で降順ソート（最新が上位）
+const sortedPosts = allPosts.sort((a, b) => {
+  return new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime();
+});
 ---
 
 <Layout title="Engineer Journey">
@@ -9,11 +18,26 @@ import Layout from '../layouts/Layout.astro';
 		
 		<section>
 			<h2>最新の投稿</h2>
-			<article>
-				<h3><a href="/posts/first-development-journey">Engineer Journey ブログサイト開発記録</a></h3>
-				<p>Astroを使用したブログサイトの開発プロセスと学んだことをまとめた最初の投稿</p>
-				<time datetime="2025-06-27">2025年6月27日</time>
-			</article>
+			{sortedPosts.map((post) => (
+				<article>
+					<h3><a href={post.url}>{post.frontmatter.title}</a></h3>
+					<p>{post.frontmatter.description}</p>
+					<div class="post-meta">
+						<time datetime={post.frontmatter.pubDate}>
+							{new Date(post.frontmatter.pubDate).toLocaleDateString('ja-JP', {
+								year: 'numeric',
+								month: 'long',
+								day: 'numeric'
+							})}
+						</time>
+						<div class="tags">
+							{post.frontmatter.tags.map((tag) => (
+								<span class="tag">{tag}</span>
+							))}
+						</div>
+					</div>
+				</article>
+			))}
 		</section>
 		
 		<nav>
@@ -70,9 +94,30 @@ import Layout from '../layouts/Layout.astro';
 		color: #666;
 	}
 	
+	.post-meta {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		margin-top: 1rem;
+	}
+	
 	time {
 		font-size: 0.9rem;
 		color: #888;
+	}
+	
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+	
+	.tag {
+		background-color: #f0f0f0;
+		color: #555;
+		padding: 0.2rem 0.5rem;
+		border-radius: 0.3rem;
+		font-size: 0.8rem;
 	}
 	
 	nav {
