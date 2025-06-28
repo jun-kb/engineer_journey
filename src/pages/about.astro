@@ -32,31 +32,93 @@ const isLearning = true;
 ---
 
 <Layout title={pageTitle} currentPath="/about">
-	<h1>About engineer journey</h1>
-	<p>このサイトはエンジニアの学習と開発の記録を目的としたブログサイトです。</p>
-	<p>技術的な学びや開発の過程を記録し、知識の蓄積と共有を行っています。</p>
-	
-	<h2>私について</h2>
-	<p>こんにちは！私は<strong>{identity.name}</strong>として活動している<strong>{identity.role}</strong>です。</p>
-	<p>特に<strong>{identity.passion}</strong>に情熱を注いでいます。</p>
-	
-	{isLearning && <p>🌱 現在は「<strong>{currentFocus}</strong>」に集中して取り組んでいます。</p>}
-	
-	<h2>技術スキル</h2>
-	<ul>
-		{skills.map((skill) => <li>{skill}</li>)}
-	</ul>
-	
-	<h2>学習目標</h2>
-	<ul>
-		{learningGoals.map((goal) => <li>{goal}</li>)}
-	</ul>
-	
-	<h2>サイトについて</h2>
-	<ul>
-		<li>技術的な学習内容の記録</li>
-		<li>開発プロジェクトの進捗と振り返り</li>
-		<li>プログラミングやソフトウェア開発に関する知見の共有</li>
-	</ul>
-	
+	<main class="container">
+		<header>
+			<h1>About engineer journey</h1>
+			<p class="description">このサイトはエンジニアの学習と開発の記録を目的としたブログサイトです。技術的な学びや開発の過程を記録し、知識の蓄積と共有を行っています。</p>
+		</header>
+		
+		<section>
+			<h2>私について</h2>
+			<p>こんにちは！私は<strong>{identity.name}</strong>として活動している<strong>{identity.role}</strong>です。</p>
+			<p>特に<strong>{identity.passion}</strong>に情熱を注いでいます。</p>
+			
+			{isLearning && <p>🌱 現在は「<strong>{currentFocus}</strong>」に集中して取り組んでいます。</p>}
+		</section>
+		
+		<section>
+			<h2>技術スキル</h2>
+			<ul>
+				{skills.map((skill) => <li>{skill}</li>)}
+			</ul>
+		</section>
+		
+		<section>
+			<h2>学習目標</h2>
+			<ul>
+				{learningGoals.map((goal) => <li>{goal}</li>)}
+			</ul>
+		</section>
+		
+		<section>
+			<h2>サイトについて</h2>
+			<ul>
+				<li>技術的な学習内容の記録</li>
+				<li>開発プロジェクトの進捗と振り返り</li>
+				<li>プログラミングやソフトウェア開発に関する知見の共有</li>
+			</ul>
+		</section>
+	</main>
 </Layout>
+
+<style>
+	main {
+		padding: 2rem 0;
+	}
+	
+	header {
+		text-align: center;
+		margin-bottom: 3rem;
+		padding-bottom: 2rem;
+		border-bottom: 1px solid var(--color-gray-200);
+	}
+	
+	header h1 {
+		margin-bottom: 1rem;
+	}
+	
+	.description {
+		color: var(--color-gray-600);
+		font-size: 1.1rem;
+		line-height: 1.6;
+		max-width: 60ch;
+		margin: 0 auto;
+	}
+	
+	section {
+		margin-bottom: 2.5rem;
+	}
+	
+	section:last-child {
+		margin-bottom: 0;
+	}
+	
+	section h2 {
+		margin-bottom: 1rem;
+		border-bottom: 1px solid var(--color-gray-200);
+		padding-bottom: 0.5rem;
+	}
+	
+	section p {
+		margin-bottom: 1rem;
+	}
+	
+	section ul {
+		margin-left: 0;
+		padding-left: 1.5rem;
+	}
+	
+	section li {
+		margin-bottom: 0.5rem;
+	}
+</style>
