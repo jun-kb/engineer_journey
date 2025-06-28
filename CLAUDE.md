@@ -30,7 +30,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 │       └── posts/          # ブログ投稿（マークダウン）
 │           ├── first-development-journey.md            # 初回開発記録
 │           ├── astro-dynamic-features.md               # Astro動的機能記録
-│           └── github-actions-workflow-optimization.md # GitHub Actions最適化記録
+│           ├── github-actions-workflow-optimization.md # GitHub Actions最適化記録
+│           └── github-actions-debugging-journey.md     # GitHub Actionsデバッグ記録
 ├── .github/
 │   └── workflows/    # GitHub Actions ワークフロー
 │       └── pr_control.yaml         # PR制御ボット（コメントでの承認・却下）
@@ -141,6 +142,7 @@ tags: ["tag1", "tag2", "tag3"]
 - **開発記録**: `/posts/first-development-journey` - プロジェクトの開発プロセスをまとめた最初の投稿
 - **Astro動的機能**: `/posts/astro-dynamic-features` - Astroの動的機能を活用したAboutページ改善記録
 - **GitHub Actions最適化**: `/posts/github-actions-workflow-optimization` - PR制御ワークフローの最適化プロセス記録
+- **GitHub Actionsデバッグ**: `/posts/github-actions-debugging-journey` - 5つのエラーを解決した実践的デバッグ記録
 
 ## Astroの動的機能活用
 
