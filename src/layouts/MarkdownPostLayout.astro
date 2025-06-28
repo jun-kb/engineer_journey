@@ -2,6 +2,17 @@
 import Layout from './Layout.astro';
 
 const { frontmatter } = Astro.props;
+
+// 読了時間を計算（日本語の平均読了速度: 約350文字/分）
+function calculateReadingTime(content: string): number {
+	const textWithoutMarkdown = content.replace(/[#*`\[\]]/g, '');
+	const charCount = textWithoutMarkdown.length;
+	const readingTimeMinutes = Math.ceil(charCount / 350);
+	return readingTimeMinutes;
+}
+
+const content = await Astro.slots.render('default');
+const readingTime = calculateReadingTime(content);
 ---
 
 <Layout title={frontmatter.title}>
@@ -25,6 +36,12 @@ const { frontmatter } = Astro.props;
 					</svg>
 					{frontmatter.author}
 				</span>
+				<span class="flex items-center gap-1">
+					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+					</svg>
+					約{readingTime}分で読めます
+				</span>
 			</div>
 			{frontmatter.description && (
 				<p class="text-lg text-gray-700 italic mb-4 leading-relaxed">{frontmatter.description}</p>
@@ -40,7 +57,7 @@ const { frontmatter } = Astro.props;
 			)}
 		</header>
 		
-		<main class="prose prose-lg prose-gray max-w-none mb-8">
+		<main class="prose prose-xl prose-gray max-w-3xl mx-auto leading-relaxed mb-12 prose-headings:scroll-mt-8 prose-h1:hidden prose-h2:text-2xl prose-h2:font-semibold prose-h2:mt-12 prose-h2:mb-4 prose-h2:border-b prose-h2:border-gray-200 prose-h2:pb-2 prose-h3:text-xl prose-h3:font-medium prose-h3:mt-8 prose-h3:mb-3 prose-p:mb-6 prose-p:leading-relaxed prose-li:mb-2 prose-code:bg-gray-100 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm prose-code:font-mono prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:rounded-lg prose-pre:p-4 prose-pre:overflow-x-auto prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:bg-blue-50 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:my-6">
 			<slot />
 		</main>
 		
@@ -54,3 +71,39 @@ const { frontmatter } = Astro.props;
 		</footer>
 	</article>
 </Layout>
+
+<script>
+	// コードブロックにコピーボタンを追加
+	document.addEventListener('DOMContentLoaded', () => {
+		const codeBlocks = document.querySelectorAll('pre');
+		
+		codeBlocks.forEach((pre) => {
+			// コピーボタンを作成
+			const copyButton = document.createElement('button');
+			copyButton.className = 'absolute top-2 right-2 bg-gray-700 hover:bg-gray-600 text-white px-2 py-1 rounded text-xs transition-colors';
+			copyButton.textContent = 'Copy';
+			
+			// pre要素を相対位置に設定
+			pre.style.position = 'relative';
+			
+			// コピー機能
+			copyButton.addEventListener('click', async () => {
+				const code = pre.textContent || '';
+				try {
+					await navigator.clipboard.writeText(code);
+					copyButton.textContent = 'Copied!';
+					copyButton.className = 'absolute top-2 right-2 bg-green-600 text-white px-2 py-1 rounded text-xs';
+					
+					setTimeout(() => {
+						copyButton.textContent = 'Copy';
+						copyButton.className = 'absolute top-2 right-2 bg-gray-700 hover:bg-gray-600 text-white px-2 py-1 rounded text-xs transition-colors';
+					}, 2000);
+				} catch (err) {
+					console.error('Failed to copy: ', err);
+				}
+			});
+			
+			pre.appendChild(copyButton);
+		});
+	});
+</script>
