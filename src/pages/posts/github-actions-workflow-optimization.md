@@ -7,7 +7,7 @@ author: 'jun-kb'
 tags: ["GitHub Actions", "DevOps", "自動化", "最適化", "ワークフロー"]
 ---
 
-# GitHub Actions ワークフロー最適化：冗長なコードを削ぎ落とす
+# ワークフロー最適化記録
 
 今回は、前回作成したPR制御ボットのGitHub Actionsワークフローを最適化し、43行から19行まで短縮した過程をまとめます。
 
