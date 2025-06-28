@@ -3,27 +3,7 @@ const currentYear = new Date().getFullYear();
 ---
 
 <footer>
-	<div>
-		<div>
-			<h3>Engineer Journey</h3>
-			<p>エンジニアの学習と開発の記録を目的としたブログサイトです</p>
-		</div>
-		<div>
-			<h4>リンク</h4>
-			<ul>
-				<li><a href="/">ホーム</a></li>
-				<li><a href="/about">このサイトについて</a></li>
-			</ul>
-		</div>
-		<div>
-			<h4>技術スタック</h4>
-			<ul>
-				<li><a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a></li>
-				<li><a href="https://pages.cloudflare.com" target="_blank" rel="noopener noreferrer">Cloudflare Pages</a></li>
-			</ul>
-		</div>
-	</div>
-	<div>
+	<div class="container-wide">
 		<p>
 			&copy; {currentYear} Engineer Journey. Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a>.
 		</p>
@@ -32,79 +12,26 @@ const currentYear = new Date().getFullYear();
 
 <style>
 	footer {
-		background-color: #f9fafb;
-		border-top: 1px solid #e5e7eb;
+		border-top: 1px solid var(--color-gray-200);
 		margin-top: 4rem;
-	}
-	
-	footer > div:first-child {
-		max-width: 768px;
-		margin: 0 auto;
-		padding: 3rem 1rem 2rem;
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-		gap: 2rem;
-	}
-	
-	footer > div:last-child {
-		border-top: 1px solid #e5e7eb;
-		background-color: #f3f4f6;
-		padding: 1rem;
-		text-align: center;
-	}
-	
-	footer h3 {
-		font-size: 1.125rem;
-		font-weight: 600;
-		color: #1f2937;
-		margin-bottom: 0.5rem;
-	}
-	
-	footer h4 {
-		font-size: 1rem;
-		font-weight: 600;
-		color: #374151;
-		margin-bottom: 0.75rem;
+		padding: 2rem 0;
 	}
 	
 	footer p {
-		color: #6b7280;
+		color: var(--color-gray-600);
 		font-size: 0.875rem;
-		line-height: 1.5;
-	}
-	
-	footer ul {
-		list-style: none;
-		padding: 0;
+		text-align: center;
 		margin: 0;
-	}
-	
-	footer li {
-		margin-bottom: 0.5rem;
 	}
 	
 	footer a {
-		color: #6b7280;
-		text-decoration: none;
-		font-size: 0.875rem;
-		transition: color 0.2s ease;
+		color: var(--color-black);
+		text-decoration: underline;
+		text-decoration-thickness: 1px;
+		text-underline-offset: 0.2em;
 	}
 	
 	footer a:hover {
-		color: #3b82f6;
-	}
-	
-	footer > div:last-child p {
-		margin: 0;
-		font-size: 0.75rem;
-	}
-	
-	footer > div:last-child a {
-		color: #3b82f6;
-		font-weight: 500;
-	}
-	
-	footer > div:last-child a:hover {
-		color: #2563eb;
+		text-decoration-thickness: 2px;
 	}
 </style>
