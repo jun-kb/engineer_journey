@@ -16,25 +16,25 @@ const readingTime = calculateReadingTime(content);
 ---
 
 <Layout title={frontmatter.title}>
-	<div class="min-h-screen bg-gray-50">
-		<!-- ヘッダーセクション - モダンなグラデーション -->
-		<header class="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-			<div class="max-w-4xl mx-auto px-6 py-12">
-				<div class="flex items-center gap-2 mb-4">
-					<a href="/" class="inline-flex items-center text-blue-100 hover:text-white transition-colors text-sm font-medium">
-						<svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+	<div>
+		<!-- ヘッダーセクション -->
+		<header>
+			<div>
+				<div>
+					<a href="/">
+						<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
 						</svg>
 						ホームへ戻る
 					</a>
 				</div>
-				<h1 class="text-3xl md:text-4xl font-bold mb-4 leading-tight">{frontmatter.title}</h1>
+				<h1>{frontmatter.title}</h1>
 				{frontmatter.description && (
-					<p class="text-xl opacity-90 mb-6 leading-relaxed">{frontmatter.description}</p>
+					<p>{frontmatter.description}</p>
 				)}
-				<div class="flex flex-wrap items-center gap-4 text-sm opacity-90">
-					<time datetime={frontmatter.pubDate} class="flex items-center gap-1">
-						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<div>
+					<time datetime={frontmatter.pubDate}>
+						<svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 002 2z" />
 						</svg>
 						{new Date(frontmatter.pubDate).toLocaleDateString('ja-JP', {
@@ -43,23 +43,23 @@ const readingTime = calculateReadingTime(content);
 							day: 'numeric'
 						})}
 					</time>
-					<span class="flex items-center gap-1">
-						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<span>
+						<svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
 						</svg>
 						{frontmatter.author}
 					</span>
-					<span class="flex items-center gap-1">
-						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<span>
+						<svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
 						</svg>
 						約{readingTime}分で読めます
 					</span>
 				</div>
 				{frontmatter.tags && (
-					<div class="flex flex-wrap gap-2 mt-4">
+					<div>
 						{frontmatter.tags.map((tag) => (
-							<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-white/20 text-white hover:bg-white/30 transition-colors">
+							<span>
 								#{tag}
 							</span>
 						))}
@@ -68,10 +68,10 @@ const readingTime = calculateReadingTime(content);
 			</div>
 		</header>
 
-		<!-- メインコンテンツ - カード型デザイン -->
-		<main class="max-w-4xl mx-auto px-6 py-8">
-			<article class="bg-white rounded-xl shadow-md overflow-hidden">
-				<div class="prose prose-xl prose-gray max-w-none px-8 py-8 leading-relaxed prose-headings:scroll-mt-8 prose-h1:hidden prose-h2:text-2xl prose-h2:font-semibold prose-h2:mt-12 prose-h2:mb-4 prose-h2:border-b prose-h2:border-gray-200 prose-h2:pb-2 prose-h3:text-xl prose-h3:font-medium prose-h3:mt-8 prose-h3:mb-3 prose-p:mb-6 prose-p:leading-relaxed prose-li:mb-2 prose-code:bg-gray-100 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm prose-code:font-mono prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:rounded-lg prose-pre:p-4 prose-pre:overflow-x-auto prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:bg-blue-50 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:my-6">
+		<!-- メインコンテンツ -->
+		<main>
+			<article>
+				<div>
 					<slot />
 				</div>
 			</article>
@@ -87,7 +87,6 @@ const readingTime = calculateReadingTime(content);
 		codeBlocks.forEach((pre) => {
 			// コピーボタンを作成
 			const copyButton = document.createElement('button');
-			copyButton.className = 'absolute top-2 right-2 bg-gray-700 hover:bg-gray-600 text-white px-2 py-1 rounded text-xs transition-colors';
 			copyButton.textContent = 'Copy';
 			
 			// pre要素を相対位置に設定
@@ -99,11 +98,9 @@ const readingTime = calculateReadingTime(content);
 				try {
 					await navigator.clipboard.writeText(code);
 					copyButton.textContent = 'Copied!';
-					copyButton.className = 'absolute top-2 right-2 bg-green-600 text-white px-2 py-1 rounded text-xs';
 					
 					setTimeout(() => {
 						copyButton.textContent = 'Copy';
-						copyButton.className = 'absolute top-2 right-2 bg-gray-700 hover:bg-gray-600 text-white px-2 py-1 rounded text-xs transition-colors';
 					}, 2000);
 				} catch (err) {
 					console.error('Failed to copy: ', err);
