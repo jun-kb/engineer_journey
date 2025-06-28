@@ -12,6 +12,7 @@ jobs:
       pull-requests: write
       contents: write
     steps:
+      - uses: actions/checkout@v4
       - run: |
           if [[ "${{ github.event.comment.body }}" == *"/approve"* ]]; then
             gh pr review "${{ github.event.issue.pull_request.url }}" --approve
