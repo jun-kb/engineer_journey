@@ -13,12 +13,18 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-      - run: |
-          if [[ "${{ github.event.comment.body }}" == *"/approve"* ]]; then
-            gh pr review ${{ github.event.issue.number }} --approve
-            gh pr merge ${{ github.event.issue.number }} --squash --delete-branch
-          elif [[ "${{ github.event.comment.body }}" == *"/reject"* ]]; then
-            gh pr close ${{ github.event.issue.number }}
-          fi
+      - name: Auto approve PR
+        if: contains(github.event.comment.body, '/approve')
+        uses: hmarr/auto-approve-action@v4
+        with:
+          review-message: "Auto approved via /approve command"
+      - name: Merge PR
+        if: contains(github.event.comment.body, '/approve')
+        run: gh pr merge ${{ github.event.issue.number }} --squash --delete-branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: Close PR
+        if: contains(github.event.comment.body, '/reject')
+        run: gh pr close ${{ github.event.issue.number }}
         env:
           GH_TOKEN: ${{ github.token }}
