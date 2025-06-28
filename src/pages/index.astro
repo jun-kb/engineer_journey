@@ -11,21 +11,13 @@ const sortedPosts = allPosts.sort((a, b) => {
 });
 ---
 
-<Layout title="Engineer Journey">
+<Layout title="Engineer Journey" currentPath="/">
 	<div>
 		<!-- ヘッダーセクション -->
 		<header>
 			<div>
 				<h1>Engineer Journey</h1>
 				<p>エンジニアの学習と開発の記録を目的としたブログサイトです</p>
-				<div>
-					<a href="/about">
-						<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-						</svg>
-						このサイトについて
-					</a>
-				</div>
 			</div>
 		</header>
 
@@ -90,13 +82,5 @@ const sortedPosts = allPosts.sort((a, b) => {
 			</section>
 		</main>
 
-		<!-- フッター -->
-		<footer>
-			<div>
-				<p>
-					&copy; 2024 Engineer Journey. Built with <a href="https://astro.build">Astro</a>.
-				</p>
-			</div>
-		</footer>
 	</div>
 </Layout>
