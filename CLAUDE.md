@@ -73,15 +73,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```
 
 #### タイポグラフィ
-- **基本フォントサイズ**: 18px（読みやすさ重視）
+- **基本フォントサイズ**: フルードタイポグラフィ（`clamp(16px, 4vw, 18px)`）で可変
 - **行間**: 1.7（快適な読書リズム）
 - **フォントファミリー**: システムフォント（-apple-system, BlinkMacSystemFont等）
-- **見出し階層**: h1(2.25rem) → h2(1.875rem) → h3(1.5rem) → h4(1.25rem) → h5(1.125rem) → h6(1rem)
+- **見出し階層**: 
+  - **デスクトップ**: h1(2.25rem) → h2(1.875rem) → h3(1.5rem) → h4(1.25rem) → h5(1.125rem) → h6(1rem)
+  - **モバイル**: h1(1.75rem) → h2(1.5rem) → h3(1.25rem) → h4(1.125rem) → h5(1rem) → h6(0.875rem)
 
 #### レイアウト制約
-- **読書幅**: 65ch（理想的な文字幅制限）
-- **広幅コンテンツ**: 80ch（ナビゲーション、フッター用）
-- **余白**: 一貫した 1rem, 1.5rem, 2rem, 3rem 単位
+- **読書幅**: `min(65ch, 100vw - 2rem)`（理想的な文字幅制限 + レスポンシブ対応）
+- **広幅コンテンツ**: `min(80ch, 100vw - 2rem)`（ナビゲーション、フッター用）
+- **余白**: 
+  - **デスクトップ**: 1rem, 1.5rem, 2rem, 3rem 単位
+  - **モバイル**: コンテナ内側1.5rem、ブレークポイント768px
 
 #### ミニマル原則
 1. **装飾の削除**: SVGアイコン、影、グラデーション、背景色を排除
@@ -182,7 +186,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
 title: '投稿タイトル'
-pubDate: YYYY-MM-DD
+pubDate: YYYY-MM-DDTHH:MM:SS
 description: '投稿の説明文'
 author: '著者名'
 tags: ["tag1", "tag2", "tag3"]
@@ -197,13 +201,16 @@ tags: ["tag1", "tag2", "tag3"]
 - **専用レイアウト**: `MarkdownPostLayout.astro`で統一されたデザイン
 - **メタデータ表示**: タイトル、公開日、著者、タグなどの自動表示
 - **SEO対応**: フロントマターによる適切なメタデータ設定
+- **正確なソート**: pubDateにISO 8601形式（YYYY-MM-DDTHH:MM:SS）を使用してトップページで正確な時系列表示
 
-### 既存の投稿
+### 既存の投稿（最新順）
 
-- **開発記録**: `/posts/first-development-journey` - プロジェクトの開発プロセスをまとめた最初の投稿
-- **Astro動的機能**: `/posts/astro-dynamic-features` - Astroの動的機能を活用したAboutページ改善記録
-- **GitHub Actions最適化**: `/posts/github-actions-workflow-optimization` - PR制御ワークフローの最適化プロセス記録
+- **スマホ対応改善**: `/posts/mobile-responsive-design-implementation` - レスポンシブWebデザインの実践、フルードタイポグラフィと768px単一ブレークポイント設計
+- **ミニマルデザイン刷新**: `/posts/minimal-design-philosophy` - コンテンツファースト設計の実装、SVGアイコン削除と65ch幅制限
 - **GitHub Actionsデバッグ**: `/posts/github-actions-debugging-journey` - 5つのエラーを解決した実践的デバッグ記録
+- **GitHub Actions最適化**: `/posts/github-actions-workflow-optimization` - PR制御ワークフローの最適化プロセス記録
+- **Astro動的機能**: `/posts/astro-dynamic-features` - Astroの動的機能を活用したAboutページ改善記録
+- **開発記録**: `/posts/first-development-journey` - プロジェクトの開発プロセスをまとめた最初の投稿
 
 ## Astroの動的機能活用
 
