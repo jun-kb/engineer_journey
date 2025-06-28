@@ -48,10 +48,10 @@
 
 主要な開発プロセスはブログ記事として公開しています：
 
-1. **[Engineer Journey ブログサイト開発記録](/posts/first-development-journey)** - 初期開発プロセスとAstro・Tailwind導入
-2. **[Astroの動的機能でAboutページを進化させた話](/posts/astro-dynamic-features)** - 動的機能を活用したページ改善
-3. **[GitHub Actions ワークフロー最適化：冗長なコードを削ぎ落とす](/posts/github-actions-workflow-optimization)** - PR制御ワークフローの最適化記録
-4. **[GitHub Actions デバッグ記録：権限エラーから完全動作まで](/posts/github-actions-debugging-journey)** - 5つのエラーを解決した実践的デバッグガイド
+1. **[Engineer Journey ブログサイト開発記録](https://engineer-journey.pages.dev/posts/first-development-journey)** - 初期開発プロセスとAstro・Tailwind導入
+2. **[Astroの動的機能でAboutページを進化させた話](https://engineer-journey.pages.dev/posts/astro-dynamic-features)** - 動的機能を活用したページ改善
+3. **[GitHub Actions ワークフロー最適化：冗長なコードを削ぎ落とす](https://engineer-journey.pages.dev/posts/github-actions-workflow-optimization)** - PR制御ワークフローの最適化記録
+4. **[GitHub Actions デバッグ記録：権限エラーから完全動作まで](https://engineer-journey.pages.dev/posts/github-actions-debugging-journey)** - 5つのエラーを解決した実践的デバッグガイド
 
 ## 🔧 自動化機能
 
