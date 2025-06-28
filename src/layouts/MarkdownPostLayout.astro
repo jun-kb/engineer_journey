@@ -180,4 +180,43 @@ const readingTime = calculateReadingTime(content);
 		background: var(--color-gray-200);
 		color: var(--color-black);
 	}
+
+	/* Mobile Post Layout */
+	@media (max-width: 768px) {
+		article {
+			padding: 1.5rem 0;
+		}
+		
+		header {
+			padding-bottom: 1.5rem;
+			margin-bottom: 2rem;
+		}
+		
+		.meta {
+			flex-direction: column;
+			gap: 0.5rem;
+			align-items: flex-start;
+		}
+		
+		.tags {
+			margin-top: 0.5rem;
+		}
+		
+		.article-footer {
+			padding-top: 2rem;
+			margin-top: 2rem;
+		}
+		
+		pre button {
+			position: static;
+			margin-top: 0.5rem;
+			align-self: flex-end;
+		}
+		
+		pre {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+		}
+	}
 </style>
