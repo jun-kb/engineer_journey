@@ -14,10 +14,12 @@
 
 ## 🚀 技術スタック
 
-- **フレームワーク**: [Astro](https://astro.build/)
-- **言語**: TypeScript, Markdown
+- **フレームワーク**: [Astro](https://astro.build/) 5.10.1
+- **言語**: TypeScript (strict), Markdown
+- **スタイリング**: [Tailwind CSS](https://tailwindcss.com/) 3.4.17
 - **AI開発ツール**: [Claude Code](https://claude.ai/code) by Anthropic
 - **AIアシスタント**: Claude (Anthropic)
+- **CI/CD**: GitHub Actions (PR制御ワークフロー)
 - **デプロイ**: Cloudflare Pages
 
 ## 🧞 コマンド
@@ -46,8 +48,18 @@
 
 主要な開発プロセスはブログ記事として公開しています：
 
-- [Engineer Journey ブログサイト開発記録](/posts/first-development-journey) - 初期開発プロセス
-- [Astroの動的機能でAboutページを進化させた話](/posts/astro-dynamic-features) - AI開発体験記録
+1. **[Engineer Journey ブログサイト開発記録](/posts/first-development-journey)** - 初期開発プロセスとAstro・Tailwind導入
+2. **[Astroの動的機能でAboutページを進化させた話](/posts/astro-dynamic-features)** - 動的機能を活用したページ改善
+3. **[GitHub Actions ワークフロー最適化：冗長なコードを削ぎ落とす](/posts/github-actions-workflow-optimization)** - PR制御ワークフローの最適化記録
+4. **[GitHub Actions デバッグ記録：権限エラーから完全動作まで](/posts/github-actions-debugging-journey)** - 5つのエラーを解決した実践的デバッグガイド
+
+## 🔧 自動化機能
+
+### GitHub Actions PR制御
+- **コメント制御**: PRに `/approve` または `/reject` コメントで自動制御
+- **自動承認・マージ**: `/approve` でPRを承認し、squash mergeでブランチ削除  
+- **自動却下**: `/reject` でPRをクローズ
+- **権限制限**: 指定ユーザーのみ操作可能
 
 ## 👀 もっと知りたい方へ
 
