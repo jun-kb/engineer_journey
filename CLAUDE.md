@@ -28,8 +28,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 │       ├── index.astro     # ルートページ（Tailwind CSS適用済み）
 │       ├── about.astro     # Aboutページ（Astroの動的機能を活用）
 │       └── posts/          # ブログ投稿（マークダウン）
-│           ├── first-development-journey.md      # 初回開発記録
-│           └── astro-dynamic-features.md         # Astro動的機能記録
+│           ├── first-development-journey.md            # 初回開発記録
+│           ├── astro-dynamic-features.md               # Astro動的機能記録
+│           └── github-actions-workflow-optimization.md # GitHub Actions最適化記録
+├── .github/
+│   └── workflows/    # GitHub Actions ワークフロー
+│       └── pr_control.yaml         # PR制御ボット（コメントでの承認・却下）
 ├── astro.config.mjs # Astro設定ファイル（Tailwind統合設定済み）
 ├── tailwind.config.js # Tailwind CSS設定ファイル
 ├── tsconfig.json    # TypeScript設定（astro/tsconfigs/strictを継承）
@@ -134,8 +138,9 @@ tags: ["tag1", "tag2", "tag3"]
 
 ### 既存の投稿
 
-- **Astro動的機能**: `/posts/astro-dynamic-features` - Astroの動的機能を活用したAboutページ改善記録
 - **開発記録**: `/posts/first-development-journey` - プロジェクトの開発プロセスをまとめた最初の投稿
+- **Astro動的機能**: `/posts/astro-dynamic-features` - Astroの動的機能を活用したAboutページ改善記録
+- **GitHub Actions最適化**: `/posts/github-actions-workflow-optimization` - PR制御ワークフローの最適化プロセス記録
 
 ## Astroの動的機能活用
 
@@ -232,3 +237,35 @@ const isLearning = true;
 - **コンポーネント**: `src/components/` に配置することを推奨（現在は未作成）
 - **動的機能**: フロントマターでのJavaScript活用を積極的に行う
 - **スタイリング**: Tailwind CSSクラスを使用（カスタムCSSは最小限に）
+
+## GitHub Actions ワークフロー
+
+### PR制御ボット
+
+`.github/workflows/pr_control.yaml` にて、コメント制御によるPR管理を自動化：
+
+#### 機能
+- **コメント制御**: PRに `/approve` または `/reject` コメントで自動制御
+- **ユーザー制限**: `jun-kb` ユーザーのみ操作可能
+- **自動承認・マージ**: `/approve` でPRを承認し、squash mergeでブランチ削除
+- **自動却下**: `/reject` でPRをクローズ
+
+#### 使用方法
+```bash
+# PR承認・マージ
+/approve
+
+# PR却下
+/reject
+```
+
+#### ワークフロー構成
+- **トリガー**: `issue_comment` イベント（PRコメント作成時）
+- **条件**: PRへのコメント かつ 許可ユーザー
+- **権限**: `pull-requests: write`, `contents: write`
+- **認証**: `GH_TOKEN: ${{ github.token }}`
+
+### 最適化の歴史
+- **初期版**: 43行（環境変数、デバッグecho、冗長なチェック）
+- **最適化版**: 19行（条件の前倒し、直接参照、最小限の実装）
+- **修正版**: 認証トークン追加（GH_TOKEN環境変数）
