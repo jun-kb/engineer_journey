@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
 title: 'コンテンツが主役のミニマルデザイン：読書体験を重視したブログ刷新記録'
-pubDate: 2025-06-28
+pubDate: 2025-06-28T17:00:00
 description: '「読者が記事に集中できる」ことを最優先に、ブログサイトをモダンなミニマルデザインに刷新。SVGアイコン削除、モノクロ色彩、65ch幅制限など、コンテンツファースト設計の実装プロセス'
 author: 'Engineer Journey'
 tags: ["デザイン", "ミニマル", "UX", "タイポグラフィ", "CSS", "Astro"]

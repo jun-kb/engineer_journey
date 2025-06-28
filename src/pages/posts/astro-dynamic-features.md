@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
 title: 'Astroの動的機能でAboutページを進化させた話'
-pubDate: 2025-06-27
+pubDate: 2025-06-27T17:00:00
 description: 'Astroチュートリアルを参考に、静的なAboutページを動的でインタラクティブなページに改善した開発記録'
 author: 'エンジニア'
 tags: ["Astro", "JavaScript", "フロントエンド", "動的レンダリング", "Web開発"]

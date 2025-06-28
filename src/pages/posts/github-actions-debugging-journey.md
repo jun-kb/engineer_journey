@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
 title: 'GitHub Actions デバッグ記録：権限エラーから完全動作まで'
-pubDate: 2025-06-28
+pubDate: 2025-06-28T16:00:00
 description: 'PR制御ワークフローが動かない原因を特定し、段階的に修正して完全動作させるまでの実践記録'
 author: 'jun-kb'
 tags: ["GitHub Actions", "デバッグ", "トラブルシューティング", "CI/CD", "権限"]
