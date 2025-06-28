@@ -21,8 +21,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 /
 ├── public/           # 静的アセット（画像、favicon等）
 ├── src/
+│   ├── components/  # 再利用可能なAstroコンポーネント
+│   │   ├── Navigation.astro            # ナビゲーションコンポーネント
+│   │   └── Footer.astro                # フッターコンポーネント
 │   ├── layouts/     # レイアウトコンポーネント
-│   │   ├── Layout.astro                # 基本レイアウト
+│   │   ├── Layout.astro                # 基本レイアウト（Navigation/Footer統合済み）
 │   │   └── MarkdownPostLayout.astro    # マークダウン投稿用レイアウト
 │   └── pages/       # Astroページファイル（.astro、.md形式）
 │       ├── index.astro     # ルートページ
@@ -46,6 +49,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **言語**: TypeScript（strictモード）
 - **ページルーティング**: ファイルベースルーティング（src/pages/）
 - **コンテンツ管理**: Markdown + フロントマター（ブログ投稿用）
+- **コンポーネント**: Astroコンポーネント（Navigation, Footer等の再利用可能UI）
 - **スタイリング**: プレーンHTML/CSS
 
 ## デプロイメント
@@ -208,6 +212,72 @@ const isLearning = true;
 </ul>
 ```
 
+### コンポーネント機能の活用
+
+Astroのコンポーネント機能を活用して、再利用可能なUI要素を作成：
+
+#### Navigationコンポーネント
+`src/components/Navigation.astro` では以下の機能を実装：
+
+- **アクティブ状態表示**: 現在のページに応じたナビゲーション項目のハイライト
+- **プロパティ受け渡し**: `currentPath` プロパティによる動的状態制御
+- **レスポンシブデザイン**: モバイル対応のナビゲーション
+- **SVGアイコン**: 各項目のアイコン表示
+
+```astro
+---
+interface Props {
+	currentPath?: string;
+}
+const { currentPath } = Astro.props;
+---
+
+<nav>
+	<a href="/" class={currentPath === '/' ? 'active' : ''}>
+		ホーム
+	</a>
+	<a href="/about" class={currentPath === '/about' ? 'active' : ''}>
+		このサイトについて
+	</a>
+</nav>
+```
+
+#### Footerコンポーネント
+`src/components/Footer.astro` では以下の機能を実装：
+
+- **動的年表示**: `new Date().getFullYear()` による自動年更新
+- **グリッドレイアウト**: レスポンシブな3カラム構成
+- **外部リンク**: 技術スタック関連の外部サイトへのリンク
+- **統一されたスタイリング**: サイト全体の一貫したデザイン
+
+#### Layout.astroでの統合
+基本レイアウトにコンポーネントを統合し、全ページで共通のヘッダー・フッターを実現：
+
+```astro
+---
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+	title: string;
+	currentPath?: string;
+}
+const { title, currentPath } = Astro.props;
+---
+
+<body>
+	<Navigation currentPath={currentPath} />
+	<slot />
+	<Footer />
+</body>
+```
+
+#### コンポーネント使用時の利点
+- **一元管理**: ナビゲーション・フッターの変更が全ページに自動反映
+- **保守性向上**: コードの重複を排除し、メンテナンスを簡素化
+- **統一性**: 全ページで一貫したデザインを保証
+- **プロパティ制御**: 動的な表示制御により柔軟なUI実現
+
 ## 開発時の注意点
 
 - **Astroページ**: `src/pages/` ディレクトリに `.astro` 形式で作成
@@ -215,7 +285,7 @@ const isLearning = true;
 - **レイアウト**: `src/layouts/` ディレクトリにレイアウトコンポーネントを配置
 - **静的アセット**: `public/` ディレクトリに配置
 - **TypeScript**: strict モードで設定済み
-- **コンポーネント**: `src/components/` に配置することを推奨（現在は未作成）
+- **コンポーネント**: `src/components/` に再利用可能なAstroコンポーネントを配置
 - **動的機能**: フロントマターでのJavaScript活用を積極的に行う
 - **スタイリング**: プレーンHTML/CSSを使用
 
