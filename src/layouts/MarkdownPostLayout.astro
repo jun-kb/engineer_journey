@@ -16,67 +16,44 @@ const readingTime = calculateReadingTime(content);
 ---
 
 <Layout title={frontmatter.title}>
-	<div>
-		<!-- ヘッダーセクション -->
+	<article class="container">
 		<header>
-			<div>
-				<div>
-					<a href="/">
-						<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-						</svg>
-						ホームへ戻る
-					</a>
-				</div>
-				<h1>{frontmatter.title}</h1>
-				{frontmatter.description && (
-					<p>{frontmatter.description}</p>
-				)}
-				<div>
-					<time datetime={frontmatter.pubDate}>
-						<svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 002 2z" />
-						</svg>
-						{new Date(frontmatter.pubDate).toLocaleDateString('ja-JP', {
-							year: 'numeric',
-							month: 'long',
-							day: 'numeric'
-						})}
-					</time>
-					<span>
-						<svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-						</svg>
-						{frontmatter.author}
-					</span>
-					<span>
-						<svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-						</svg>
-						約{readingTime}分で読めます
-					</span>
-				</div>
-				{frontmatter.tags && (
-					<div>
-						{frontmatter.tags.map((tag) => (
-							<span>
-								#{tag}
-							</span>
-						))}
-					</div>
-				)}
+			<h1>{frontmatter.title}</h1>
+			
+			{frontmatter.description && (
+				<p class="description">{frontmatter.description}</p>
+			)}
+			
+			<div class="meta">
+				<time datetime={frontmatter.pubDate}>
+					{new Date(frontmatter.pubDate).toLocaleDateString('ja-JP', {
+						year: 'numeric',
+						month: 'long',
+						day: 'numeric'
+					})}
+				</time>
+				<span>約{readingTime}分で読めます</span>
 			</div>
+			
+			{frontmatter.tags && (
+				<div class="tags">
+					{frontmatter.tags.map((tag) => (
+						<span class="tag">#{tag}</span>
+					))}
+				</div>
+			)}
 		</header>
 
-		<!-- メインコンテンツ -->
-		<main>
-			<article>
-				<div>
-					<slot />
-				</div>
-			</article>
+		<main class="content">
+			<slot />
 		</main>
-	</div>
+
+		<footer class="article-footer">
+			<div class="back-link">
+				<a href="/">← ホームへ戻る</a>
+			</div>
+		</footer>
+	</article>
 </Layout>
 
 <script>
@@ -111,3 +88,96 @@ const readingTime = calculateReadingTime(content);
 		});
 	});
 </script>
+
+<style>
+	article {
+		padding: 2rem 0;
+	}
+	
+	header {
+		padding-bottom: 2rem;
+		border-bottom: 1px solid var(--color-gray-200);
+		margin-bottom: 3rem;
+	}
+	
+	.article-footer {
+		padding-top: 3rem;
+		border-top: 1px solid var(--color-gray-200);
+		margin-top: 3rem;
+		text-align: center;
+	}
+	
+	.back-link a {
+		color: var(--color-gray-600);
+		text-decoration: none;
+		font-size: 0.9rem;
+		transition: color 0.2s ease;
+		display: inline-block;
+		padding: 0.5rem 1rem;
+		border: 1px solid var(--color-gray-200);
+		border-radius: 6px;
+	}
+	
+	.back-link a:hover {
+		color: var(--color-black);
+		border-color: var(--color-black);
+		text-decoration: none;
+	}
+	
+	header h1 {
+		margin-bottom: 1rem;
+		line-height: 1.2;
+	}
+	
+	.description {
+		font-size: 1.1rem;
+		color: var(--color-gray-600);
+		margin-bottom: 1.5rem;
+		line-height: 1.6;
+	}
+	
+	.meta {
+		display: flex;
+		gap: 1.5rem;
+		font-size: 0.875rem;
+		color: var(--color-gray-600);
+		margin-bottom: 1.5rem;
+	}
+	
+	.tags {
+		display: flex;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+	}
+	
+	.tag {
+		font-size: 0.875rem;
+		color: var(--color-gray-600);
+		background: none;
+		font-weight: 400;
+	}
+	
+	.content {
+		line-height: 1.7;
+	}
+	
+	/* Copy button styling */
+	pre button {
+		position: absolute;
+		top: 0.5rem;
+		right: 0.5rem;
+		background: var(--color-gray-100);
+		border: 1px solid var(--color-gray-200);
+		color: var(--color-gray-600);
+		font-size: 0.75rem;
+		padding: 0.25rem 0.5rem;
+		border-radius: 3px;
+		cursor: pointer;
+		transition: all 0.2s ease;
+	}
+	
+	pre button:hover {
+		background: var(--color-gray-200);
+		color: var(--color-black);
+	}
+</style>

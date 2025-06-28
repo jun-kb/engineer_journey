@@ -50,7 +50,65 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **ページルーティング**: ファイルベースルーティング（src/pages/）
 - **コンテンツ管理**: Markdown + フロントマター（ブログ投稿用）
 - **コンポーネント**: Astroコンポーネント（Navigation, Footer等の再利用可能UI）
-- **スタイリング**: プレーンHTML/CSS
+- **スタイリング**: プレーンHTML/CSS（ミニマルデザイン）
+
+## デザインシステム（ミニマル設計）
+
+### コンテンツファースト設計思想
+
+このサイトは「読者が記事に集中できる」ことを最優先に設計されています：
+
+#### カラーパレット
+```css
+:root {
+  --color-black: #000000;      /* メインテキスト、見出し */
+  --color-white: #ffffff;      /* 背景色 */
+  --color-gray-50: #fafafa;    /* コードブロック背景 */
+  --color-gray-100: #f5f5f5;   /* ボタン背景 */
+  --color-gray-200: #e5e5e5;   /* 境界線、区切り線 */
+  --color-gray-400: #a3a3a3;   /* 未使用 */
+  --color-gray-600: #525252;   /* 補助テキスト、メタ情報 */
+  --color-gray-900: #171717;   /* 本文テキスト */
+}
+```
+
+#### タイポグラフィ
+- **基本フォントサイズ**: 18px（読みやすさ重視）
+- **行間**: 1.7（快適な読書リズム）
+- **フォントファミリー**: システムフォント（-apple-system, BlinkMacSystemFont等）
+- **見出し階層**: h1(2.25rem) → h2(1.875rem) → h3(1.5rem) → h4(1.25rem) → h5(1.125rem) → h6(1rem)
+
+#### レイアウト制約
+- **読書幅**: 65ch（理想的な文字幅制限）
+- **広幅コンテンツ**: 80ch（ナビゲーション、フッター用）
+- **余白**: 一貫した 1rem, 1.5rem, 2rem, 3rem 単位
+
+#### ミニマル原則
+1. **装飾の削除**: SVGアイコン、影、グラデーション、背景色を排除
+2. **機能的UI**: 必要最小限の視覚的手がかりのみ
+3. **タイポグラフィ中心**: フォント階層と余白で情報構造を表現
+4. **直感的ナビゲーション**: シンプルで迷わない導線設計
+
+### コンポーネント設計指針
+
+#### Navigation.astro
+- テキストのみ、アイコンなし
+- アクティブ状態は下線（::after疑似要素）で表現
+- ホバー時の色変化のみ
+
+#### Footer.astro  
+- 最小限の情報（著作権とAstroリンクのみ）
+- 中央揃え、シンプルな境界線
+
+#### MarkdownPostLayout.astro
+- 記事幅65ch制限で最適な読書体験
+- メタ情報（日付、読了時間、タグ）を控えめに配置
+- 記事末尾にホームへ戻るリンク（読了後の自然な導線）
+
+#### Layout.astro（グローバルスタイル）
+- CSS変数による色彩管理
+- 全要素のリセット（box-sizing, margin, padding）
+- レスポンシブ対応のコンテナクラス
 
 ## デプロイメント
 
@@ -280,6 +338,7 @@ const { title, currentPath } = Astro.props;
 
 ## 開発時の注意点
 
+### 基本ルール
 - **Astroページ**: `src/pages/` ディレクトリに `.astro` 形式で作成
 - **ブログ投稿**: `src/pages/posts/` ディレクトリに `.md` 形式で作成
 - **レイアウト**: `src/layouts/` ディレクトリにレイアウトコンポーネントを配置
@@ -287,7 +346,54 @@ const { title, currentPath } = Astro.props;
 - **TypeScript**: strict モードで設定済み
 - **コンポーネント**: `src/components/` に再利用可能なAstroコンポーネントを配置
 - **動的機能**: フロントマターでのJavaScript活用を積極的に行う
-- **スタイリング**: プレーンHTML/CSSを使用
+
+### ミニマルデザイン実装ガイドライン
+
+#### 🚫 使用禁止要素
+- **SVGアイコン**: テキストのみで表現すること
+- **影・グラデーション**: `box-shadow`, `background: linear-gradient()` 等は使用しない
+- **背景色**: 白以外の背景色は基本的に使用しない（コードブロック等例外あり）
+- **複雑なレイアウト**: Grid/Flexboxは最小限に留める
+
+#### ✅ 推奨実装パターン
+- **コンテナクラス**: 必ず `.container` (65ch) または `.container-wide` (80ch) を使用
+- **色彩**: CSS変数 `var(--color-*)` のみ使用
+- **余白**: 1rem, 1.5rem, 2rem, 3rem の一貫した単位
+- **フォント**: システムフォントスタックを維持
+- **ホバー効果**: 色変化と underline thickness のみ
+
+#### 🎯 コンポーネント別指針
+```astro
+<!-- ❌ 悪い例: アイコン付きナビゲーション -->
+<nav>
+  <a href="/"><svg>...</svg> ホーム</a>
+</nav>
+
+<!-- ✅ 良い例: テキストのみナビゲーション -->
+<nav>
+  <a href="/" class={currentPath === '/' ? 'active' : ''}>ホーム</a>
+</nav>
+
+<!-- ❌ 悪い例: 装飾的なカード -->
+<article class="card shadow-lg bg-gradient">
+  <div class="badge primary">
+    <svg>...</svg> タグ
+  </div>
+</article>
+
+<!-- ✅ 良い例: ミニマルな記事レイアウト -->
+<article>
+  <div class="tags">
+    <span class="tag">#タグ</span>
+  </div>
+</article>
+```
+
+#### 📏 レイアウト制約
+- **記事コンテンツ**: 最大65ch幅で読書最適化
+- **ナビゲーション・フッター**: 最大80ch幅
+- **行間**: 本文1.7、見出し1.3を基準
+- **余白の積み重ね**: margin-bottom で垂直リズム作成
 
 ## GitHub Actions ワークフロー
 
