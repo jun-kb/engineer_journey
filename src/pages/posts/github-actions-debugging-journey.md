@@ -210,6 +210,67 @@ gh run list --limit 2
 # → PR状態: Merged ✅
 ```
 
+## エラー5: auto-approve-actionのイベント制限
+
+しかし、まだ終わりではありませんでした...
+
+### 症状
+```
+This action must be run using a `pull_request` event or have an explicit `pull-request-number` provided
+```
+
+### 原因
+`auto-approve-action` は `pull_request` イベントを前提としており、`issue_comment` イベントでは明示的にPR番号を指定する必要がある。
+
+### 最終修正
+```yaml
+# Before（PR番号未指定）
+- name: Auto approve PR
+  uses: hmarr/auto-approve-action@v4
+  with:
+    review-message: "Auto approved via /approve command"
+
+# After（PR番号明示）
+- name: Auto approve PR
+  uses: hmarr/auto-approve-action@v4
+  with:
+    review-message: "Auto approved via /approve command"
+    pull-request-number: ${{ github.event.issue.number }}
+```
+
+### 最終動作確認
+
+この修正により、ついに完全動作を達成：
+
+```bash
+# 最終テスト
+gh pr create --title "test: 修正されたワークフローの最終テスト"
+gh pr comment 16 --body "/approve"
+
+# 結果確認
+gh run list --limit 2
+# → completed success ✅
+# → PR状態: Merged ✅
+# → 実行時間: 13秒で完了 ✅
+```
+
+## 教訓と学び
+
+### 5つのエラーから学んだこと
+
+1. **認証**: GitHub CLI には `GH_TOKEN` が必須
+2. **コンテキスト**: Git操作には `actions/checkout` が必要
+3. **参照形式**: GitHub CLI は番号形式を期待
+4. **権限制限**: 自己承認は不可、専用アクションが必要
+5. **イベント対応**: アクションごとに適切なパラメータ指定が必要
+
+### デバッグのベストプラクティス
+
+1. **ログ確認**: `gh run view --log-failed` でエラー詳細を把握
+2. **段階的解決**: 一度に全てを修正せず、一つずつ対処
+3. **ドキュメント確認**: 外部アクションの要件を正確に理解
+4. **テスト駆動**: 修正後は必ず動作確認を実行
+
 ## まとめ
 
 GitHub Actions のデバッグは以下のアプローチが効果的：
