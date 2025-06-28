@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
 title: 'GitHub Actions ワークフロー最適化：冗長なコードを削ぎ落とす'
-pubDate: 2025-06-28
+pubDate: 2025-06-28T15:00:00
 description: 'PR制御ボットのワークフローを43行から19行に最適化した実践記録'
 author: 'jun-kb'
 tags: ["GitHub Actions", "DevOps", "自動化", "最適化", "ワークフロー"]

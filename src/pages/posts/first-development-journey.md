@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
 title: 'Engineer Journey ブログサイト開発記録'
-pubDate: 2025-06-27
+pubDate: 2025-06-27T15:00:00
 description: 'Astroを使用したブログサイトの開発プロセスと学んだことをまとめた最初の投稿'
 author: 'Jun'
 tags: ["astro", "typescript", "cloudflare-pages", "web-development"]

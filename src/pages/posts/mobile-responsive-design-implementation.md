@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
 title: 'スマホ対応でミニマルデザインを洗練：レスポンシブWebデザインの実践'
-pubDate: 2025-06-28
+pubDate: 2025-06-28T19:00:00
 description: 'スマホでの文字サイズと余白問題を解決し、ミニマルデザイン思想に沿ったレスポンシブ対応を実装。フルードタイポグラフィと適切なブレークポイント設計で読みやすさを向上。'
 author: 'jun-kb'
 tags: ["Responsive Design", "Mobile UX", "Minimal Design", "Typography", "CSS"]
