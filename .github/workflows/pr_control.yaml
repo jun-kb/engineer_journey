@@ -15,10 +15,10 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           if [[ "${{ github.event.comment.body }}" == *"/approve"* ]]; then
-            gh pr review "${{ github.event.issue.pull_request.url }}" --approve
-            gh pr merge "${{ github.event.issue.pull_request.url }}" --squash --delete-branch
+            gh pr review ${{ github.event.issue.number }} --approve
+            gh pr merge ${{ github.event.issue.number }} --squash --delete-branch
           elif [[ "${{ github.event.comment.body }}" == *"/reject"* ]]; then
-            gh pr close "${{ github.event.issue.pull_request.url }}"
+            gh pr close ${{ github.event.issue.number }}
           fi
         env:
           GH_TOKEN: ${{ github.token }}
