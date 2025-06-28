@@ -1,0 +1,21 @@
+name: PR Control Bot
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  control-pr:
+    if: github.event.issue.pull_request && github.event.comment.user.login == 'jun-kb'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: write
+    steps:
+      - run: |
+          if [[ "${{ github.event.comment.body }}" == *"/approve"* ]]; then
+            gh pr review "${{ github.event.issue.pull_request.url }}" --approve
+            gh pr merge "${{ github.event.issue.pull_request.url }}" --squash --delete-branch
+          elif [[ "${{ github.event.comment.body }}" == *"/reject"* ]]; then
+            gh pr close "${{ github.event.issue.pull_request.url }}"
+          fi
