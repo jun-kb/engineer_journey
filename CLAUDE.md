@@ -23,18 +23,24 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ├── src/
 │   ├── components/  # 再利用可能なAstroコンポーネント
 │   │   ├── Navigation.astro            # ナビゲーションコンポーネント
-│   │   └── Footer.astro                # フッターコンポーネント
+│   │   ├── Footer.astro                # フッターコンポーネント
+│   │   └── CalendarComponent.astro     # 投稿カレンダーコンポーネント
 │   ├── layouts/     # レイアウトコンポーネント
 │   │   ├── Layout.astro                # 基本レイアウト（Navigation/Footer統合済み）
 │   │   └── MarkdownPostLayout.astro    # マークダウン投稿用レイアウト
+│   ├── utils/       # ユーティリティ関数
+│   │   └── CalendarUtils.ts            # カレンダーデータ処理関数（TypeScript）
 │   └── pages/       # Astroページファイル（.astro、.md形式）
 │       ├── index.astro     # ルートページ
 │       ├── about.astro     # Aboutページ（Astroの動的機能を活用）
+│       ├── calendar.astro  # 投稿カレンダーページ
 │       └── posts/          # ブログ投稿（マークダウン）
 │           ├── first-development-journey.md            # 初回開発記録
 │           ├── astro-dynamic-features.md               # Astro動的機能記録
 │           ├── github-actions-workflow-optimization.md # GitHub Actions最適化記録
-│           └── github-actions-debugging-journey.md     # GitHub Actionsデバッグ記録
+│           ├── github-actions-debugging-journey.md     # GitHub Actionsデバッグ記録
+│           ├── minimal-design-philosophy.md            # ミニマルデザイン刷新記録
+│           └── mobile-responsive-design-implementation.md # スマホ対応実装記録
 ├── .github/
 │   └── workflows/    # GitHub Actions ワークフロー
 │       └── pr_control.yaml         # PR制御ボット（コメントでの承認・却下）
@@ -433,3 +439,27 @@ const { title, currentPath } = Astro.props;
 - **初期版**: 43行（環境変数、デバッグecho、冗長なチェック）
 - **最適化版**: 19行（条件の前倒し、直接参照、最小限の実装）
 - **修正版**: 認証トークン追加（GH_TOKEN環境変数）
+
+## 投稿カレンダー機能
+
+### 概要
+GitHub風のcontribution graphライクな投稿頻度可視化機能。`/calendar`ページで投稿の継続性と頻度を視覚的に確認できます。
+
+### 機能構成
+- **CalendarComponent.astro**: カレンダー表示コンポーネント
+- **CalendarUtils.ts**: データ処理ユーティリティ関数（TypeScript化）
+- **calendar.astro**: 投稿カレンダーページ
+
+### 主要機能
+- **投稿頻度の可視化**: 日別投稿数を色の濃淡で表示
+- **統計情報**: 総投稿数、投稿日数の表示
+- **最近の投稿一覧**: 直近投稿の日付別グループ化表示
+- **レスポンシブ対応**: デスクトップ・モバイル両対応
+
+### 技術仕様
+- **データ取得**: `import.meta.glob()` で全投稿を自動取得
+- **日付処理**: ISO 8601形式（YYYY-MM-DDTHH:MM:SS）対応、エラーハンドリング強化
+- **型安全性**: TypeScript完全対応、Post/CalendarData等の型定義
+- **バリデーション**: 入力データの検証と適切なエラーハンドリング
+- **色彩設計**: ミニマルデザインに準拠したモノクロ濃淡表現
+- **表示形式**: 現在月のカレンダー表示（GitHub風UI）

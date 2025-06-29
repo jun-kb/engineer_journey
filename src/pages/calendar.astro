@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CalendarComponent from '../components/CalendarComponent.astro';
+import type { Post } from '../utils/CalendarUtils.ts';
+
+// すべてのブログ投稿を取得
+const posts = import.meta.glob('./posts/*.md', { eager: true });
+const allPosts = Object.values(posts) as Post[];
+
+// データバリデーション
+if (!allPosts || allPosts.length === 0) {
+  console.warn('No posts found for calendar display');
+}
+---
+
+<Layout title="投稿カレンダー - Engineer Journey" currentPath="/calendar">
+	<header class="container">
+		<h1>投稿カレンダー</h1>
+		<p>GitHub風の投稿頻度可視化カレンダーです。ブログ投稿の頻度と継続性を一目で確認できます。</p>
+	</header>
+
+	<main class="container-wide">
+		<CalendarComponent posts={allPosts} />
+	</main>
+</Layout>
+
+<style>
+	header {
+		padding: 3rem 0 2rem;
+		text-align: center;
+		border-bottom: 1px solid var(--color-gray-200);
+		margin-bottom: 3rem;
+	}
+	
+	header h1 {
+		margin-bottom: 1rem;
+	}
+	
+	header p {
+		color: var(--color-gray-600);
+		font-size: 1.1rem;
+		max-width: 60ch;
+		margin: 0 auto;
+	}
+</style>
