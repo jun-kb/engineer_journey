@@ -192,7 +192,7 @@ function getIntensityLevel(count: number): number {
  * @returns 日本語の月名
  */
 export function getMonthName(month: number): string {
-  if (typeof month !== 'number' || month < 0 || month > 11) {
+  if (typeof month !== 'number' || isNaN(month) || month < 0 || month > 11) {
     console.warn('Invalid month provided to getMonthName:', month);
     return '不明';
   }
