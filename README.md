@@ -1,123 +1,59 @@
 # Engineer Journey: An AI-Powered Blog
 
-このリポジトリは、**Claude Code**（Anthropic社のAI開発ツール）を使用して開発・運用されているブログプロジェクトです。設計からコーディング、記事執筆、デプロイまで、多くの作業をAIアシスタントが担当しています。
+[![Built with Astro](https://astro.badg.es/v2/built-with-astro/tiny.svg)](https://astro.build)
 
-## 🤖 このプロジェクトについて
+**AIと共に、ブログをゼロから育てていく開発の旅。**
 
-このブログは、「AI開発ツールを使って実際にどこまで効率的に開発できるか」を検証するための実験的プロジェクトです。人間が高レベルな指示を与え、Claude CodeのAIアシスタントが具体的な実装を担当する協働開発を実践しています。
+このリポジトリは、AIアシスタント（[Claude](https://claude.ai/)）と人間のエンジニアが協業し、ブログを開発・運用する実験的プロジェクトです。「AIはどこまで優秀な開発パートナーになり得るか？」をテーマに、設計、コーディング、記事執筆、そして改善の全プロセスを記録・公開しています。
 
-### 主な特徴
+**➡️ ライブサイト: [https://engineer-journey.pages.dev/](https://engineer-journey.pages.dev/)**
 
-- **Claude Codeによる効率開発**: Anthropic社のClaude CodeとClaude AIを使用して、機能実装、UI改善、記事作成を行っています。
-- **人間とAIの協業**: 人間が「こんな機能が欲しい」「この記事を書いて」といった指示を与え、AIが具体的な実装とコード生成を担当します。
-- **開発プロセスの一部公開**: 主要な開発体験や学習プロセスをブログ記事として記録・公開しています。
+---
+
+## ✨ このブログの主な特徴
+
+*   **🤖 AIとの協業開発 (AI-Driven Development)**
+    *   機能実装からUIデザイン、ブログ記事の執筆まで、開発の大部分をAIが担当。人間はディレクションとレビューに集中します。
+
+*   **📖 開発プロセスをコンテンツに (Process as Content)**
+    *   成功も失敗も、すべての開発体験がブログ記事の題材。AIとのリアルな開発の裏側を覗くことができます。
+
+*   **🎨 コンテンツ中心のミニマルデザイン (Minimalist Design)**
+    *   余計な装飾を削ぎ落とし、読書体験を最優先。タイポグラフィと余白を重視した、静かで美しいデザインを追求しています。
+
+*   **🗓️ GitHub風の投稿カレンダー (Contribution Calendar)**
+    *   ブログの更新頻度を可視化するオリジナルコンポーネント。日々の開発の足跡が一目でわかります。
 
 ## 🚀 技術スタック
 
-- **フレームワーク**: [Astro](https://astro.build/) 5.10.1
-- **言語**: TypeScript (strict), Markdown
-- **スタイリング**: プレーンHTML/CSS（ミニマルデザイン）
-- **AI開発ツール**: [Claude Code](https://claude.ai/code) by Anthropic
-- **AIアシスタント**: Claude (Anthropic)
-- **CI/CD**: GitHub Actions (PR制御ワークフロー)
-- **デプロイ**: Cloudflare Pages
+| カテゴリ       | 技術                               |
+| :------------- | :--------------------------------- |
+| **フレームワーク** | [Astro](https://astro.build/)      |
+| **言語**       | TypeScript, Markdown               |
+| **テスト**       | [Vitest](https://vitest.dev/)      |
+| **AIアシスタント** | [Claude](https://claude.ai/)       |
+| **CI/CD**      | GitHub Actions                     |
+| **デプロイ**     | Cloudflare Pages                   |
 
-## 🎨 デザイン哲学
+## ✍️ 最近の開発記録
 
-### ミニマルデザイン設計思想
+開発のハイライトはブログ記事として公開しています。
 
-このブログは「**コンテンツファースト**」の設計思想に基づいて構築されています：
+1.  **[スマホ対応でミニマルデザインを洗練：レスポンシブWebデザインの実践](https://engineer-journey.pages.dev/posts/mobile-responsive-design-implementation)**
+2.  **[コンテンツが主役のミニマルデザイン：読書体験を重視したブログ刷新記録](https://engineer-journey.pages.dev/posts/minimal-design-philosophy)**
+3.  **[GitHub Actions デバッグ記録：権限エラーから完全動作まで](https://engineer-journey.pages.dev/posts/github-actions-debugging-journey)**
 
-#### 1. 読書体験の最優先化
-- **65ch幅制限**: 理想的な読みやすさを実現する文字幅
-- **18px基本フォントサイズ**: 眼精疲労を軽減する適切なサイズ  
-- **1.7行間**: 快適な読書リズムを提供
-- **システムフォント**: 各デバイスで最適化されたネイティブフォント使用
+...その他の記事は[ブログサイト](https://engineer-journey.pages.dev/)でご覧ください。
 
-#### 2. ミニマル色彩設計
-- **モノクロ基調**: 黒・白・グレーのみの洗練されたパレット
-- **装飾の削除**: SVGアイコン、影、グラデーションを排除
-- **機能的アクセント**: 必要最小限の視覚的手がかりのみ提供
+## 🛠️ ローカルで動かす
 
-#### 3. タイポグラフィ中心設計
-- **明確な情報階層**: h1〜h6の適切なサイズ設定
-- **豊富な余白**: コンテンツ間の視覚的呼吸を確保
-- **一貫性**: 全ページで統一されたレイアウトルール
+| Command           | Action                                     |
+| :---------------- | :----------------------------------------- |
+| `npm install`     | 依存関係をインストールします               |
+| `npm run dev`     | 開発サーバーを `localhost:4321` で起動します |
+| `npm run build`   | プロダクション用にビルドします             |
+| `npm test`        | 単体テストを実行します                     |
 
-#### 4. ナビゲーション最適化
-- **シンプルな導線**: 迷わせない直感的な構造
-- **記事末尾の戻りリンク**: 読了後の自然な行動を支援
-- **アクティブ状態の控えめ表示**: 下線のみの洗練された表現
+---
 
-### 実装の特徴
-
-- **CSS変数**: 一元管理されたカラーパレット（--color-black, --color-gray-*, --color-white）
-- **コンテナクラス**: `.container` (65ch) と `.container-wide` (80ch) で統一
-- **レスポンシブデザイン**: 
-  - フルードタイポグラフィ（`clamp(16px, 4vw, 18px)`）で可変フォントサイズ
-  - 768px単一ブレークポイントによるシンプルな設計
-  - スマホ対応の見出しサイズ調整（ミニマルデザイン維持）
-  - レスポンシブ幅制御（`min(65ch, 100vw - 2rem)`）
-- **アクセシビリティ**: 適切なコントラスト比と読みやすさを確保
-
-## 📊 投稿カレンダー機能
-
-### GitHub風投稿可視化
-このブログには、投稿頻度を視覚的に確認できる投稿カレンダー機能が搭載されています：
-
-- **GitHub風UI**: contribution graphライクなカレンダー表示
-- **投稿頻度の可視化**: 日別投稿数を色の濃淡で表現
-- **統計情報**: 総投稿数、投稿日数の自動集計
-- **最近の投稿一覧**: 直近投稿の日付別グループ化表示
-- **ミニマルデザイン準拠**: モノクロ濃淡による洗練された表現
-
-### 技術実装
-- **動的データ処理**: Astroの`import.meta.glob()`で全投稿を自動取得
-- **日付解析**: ISO 8601形式の公開日時から日別集計を生成
-- **レスポンシブ対応**: デスクトップ・モバイル両対応のカレンダーUI
-- **コンポーネント設計**: 再利用可能なCalendarComponentとユーティリティ関数で構成
-
-## 🧞 コマンド
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | 依存関係をインストールします                            |
-| `npm run dev`             | 開発サーバーを `localhost:4321` で起動します      |
-| `npm run build`           | プロダクション用にサイトを `./dist/` にビルドします          |
-| `npm run preview`         | ビルドをローカルでプレビューします     |
-
-## 🛠️ 開発環境
-
-このプロジェクトは **Claude Code** を使用して開発されています：
-
-- **Claude Code**: Anthropic社が提供するAI駆動開発ツール
-- **特徴**: 自然言語での指示から直接コード生成・編集が可能
-- **ワークフロー**: プロンプト → AI実装 → 人間レビュー → デプロイ
-
-## 🌐 ライブサイト
-
-実際のブログサイトをご覧ください：
-**https://engineer-journey.pages.dev/**
-
-## 📝 開発記録
-
-主要な開発プロセスはブログ記事として公開しています（最新記事順）：
-
-1. **[スマホ対応でミニマルデザインを洗練：レスポンシブWebデザインの実践](https://engineer-journey.pages.dev/posts/mobile-responsive-design-implementation)** - フルードタイポグラフィと768px単一ブレークポイント設計
-2. **[コンテンツが主役のミニマルデザイン：読書体験を重視したブログ刷新記録](https://engineer-journey.pages.dev/posts/minimal-design-philosophy)** - SVGアイコン削除、65ch幅制限など、コンテンツファースト設計の実装
-3. **[GitHub Actions デバッグ記録：権限エラーから完全動作まで](https://engineer-journey.pages.dev/posts/github-actions-debugging-journey)** - 5つのエラーを解決した実践的デバッグガイド  
-4. **[GitHub Actions ワークフロー最適化：冗長なコードを削ぎ落とす](https://engineer-journey.pages.dev/posts/github-actions-workflow-optimization)** - PR制御ワークフローの最適化記録
-5. **[Astroの動的機能でAboutページを進化させた話](https://engineer-journey.pages.dev/posts/astro-dynamic-features)** - 動的機能を活用したページ改善
-6. **[Engineer Journey ブログサイト開発記録](https://engineer-journey.pages.dev/posts/first-development-journey)** - 初期開発プロセスとAstro導入
-
-## 🔧 自動化機能
-
-### GitHub Actions PR制御
-- **コメント制御**: PRに `/approve` または `/reject` コメントで自動制御
-- **自動承認・マージ**: `/approve` でPRを承認し、squash mergeでブランチ削除  
-- **自動却下**: `/reject` でPRをクローズ
-- **権限制限**: 指定ユーザーのみ操作可能
-
-## 👀 もっと知りたい方へ
-
-Claude Codeを使った実際の開発体験や、AI協働開発の可能性について詳しく知りたい方は、ぜひブログをご覧ください。
+このプロジェクトは、AIと人間の新しい協業の形を模索する一つの挑戦です。ぜひ、私たちの旅の記録をご覧ください。
