@@ -1,10 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import CalendarComponent from '../components/CalendarComponent.astro';
+import type { Post } from '../utils/CalendarUtils.ts';
 
 // すべてのブログ投稿を取得
 const posts = import.meta.glob('./posts/*.md', { eager: true });
-const allPosts = Object.values(posts);
+const allPosts = Object.values(posts) as Post[];
+
+// データバリデーション
+if (!allPosts || allPosts.length === 0) {
+  console.warn('No posts found for calendar display');
+}
 ---
 
 <Layout title="投稿カレンダー - Engineer Journey" currentPath="/calendar">

@@ -1,11 +1,16 @@
 ---
-import { generateCalendarData, generateMonthData, getMonthName, getCurrentYearMonth } from '../utils/CalendarUtils.js';
+import { generateCalendarData, generateMonthData, getMonthName, getCurrentYearMonth, type Post } from '../utils/CalendarUtils.ts';
 
 interface Props {
-  posts: any[];
+  posts: Post[];
 }
 
 const { posts } = Astro.props;
+
+// propsバリデーション
+if (!posts || !Array.isArray(posts)) {
+  throw new Error('Invalid posts data provided to CalendarComponent');
+}
 
 // カレンダーデータを生成
 const calendarData = generateCalendarData(posts);

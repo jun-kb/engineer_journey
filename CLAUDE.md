@@ -29,7 +29,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 │   │   ├── Layout.astro                # 基本レイアウト（Navigation/Footer統合済み）
 │   │   └── MarkdownPostLayout.astro    # マークダウン投稿用レイアウト
 │   ├── utils/       # ユーティリティ関数
-│   │   └── CalendarUtils.js            # カレンダーデータ処理関数
+│   │   └── CalendarUtils.ts            # カレンダーデータ処理関数（TypeScript）
 │   └── pages/       # Astroページファイル（.astro、.md形式）
 │       ├── index.astro     # ルートページ
 │       ├── about.astro     # Aboutページ（Astroの動的機能を活用）
@@ -447,7 +447,7 @@ GitHub風のcontribution graphライクな投稿頻度可視化機能。`/calend
 
 ### 機能構成
 - **CalendarComponent.astro**: カレンダー表示コンポーネント
-- **CalendarUtils.js**: データ処理ユーティリティ関数
+- **CalendarUtils.ts**: データ処理ユーティリティ関数（TypeScript化）
 - **calendar.astro**: 投稿カレンダーページ
 
 ### 主要機能
@@ -458,6 +458,8 @@ GitHub風のcontribution graphライクな投稿頻度可視化機能。`/calend
 
 ### 技術仕様
 - **データ取得**: `import.meta.glob()` で全投稿を自動取得
-- **日付処理**: ISO 8601形式（YYYY-MM-DDTHH:MM:SS）対応
+- **日付処理**: ISO 8601形式（YYYY-MM-DDTHH:MM:SS）対応、エラーハンドリング強化
+- **型安全性**: TypeScript完全対応、Post/CalendarData等の型定義
+- **バリデーション**: 入力データの検証と適切なエラーハンドリング
 - **色彩設計**: ミニマルデザインに準拠したモノクロ濃淡表現
 - **表示形式**: 現在月のカレンダー表示（GitHub風UI）
