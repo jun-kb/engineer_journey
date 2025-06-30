@@ -33,6 +33,32 @@ export interface MonthDayData {
 }
 
 /**
+ * ローカルタイムゾーンベースの日付キーを生成
+ * toISOString()のUTC変換問題を回避し、表示と一貫性を保つ
+ * @param dateString - 日付文字列
+ * @returns YYYY-MM-DD形式の日付キー
+ */
+function getLocalDateKey(dateString: string): string {
+  try {
+    // ISO文字列を直接パースしてローカル日付を取得
+    const isoString = dateString.includes('T') ? 
+      dateString.split('T')[0] : dateString;
+    const [year, month, day] = isoString.split('-').map(Number);
+    
+    // 基本的な妥当性チェック
+    if (!year || !month || !day || month < 1 || month > 12 || day < 1 || day > 31) {
+      throw new Error(`Invalid date format: ${dateString}`);
+    }
+    
+    const monthStr = String(month).padStart(2, '0');
+    const dayStr = String(day).padStart(2, '0');
+    return `${year}-${monthStr}-${dayStr}`;
+  } catch (error) {
+    throw new Error(`Invalid date: ${dateString}`);
+  }
+}
+
+/**
  * ブログ投稿データからカレンダー表示用のデータを生成
  * @param posts - import.meta.glob()で取得したブログ投稿配列
  * @returns カレンダー表示用のデータ構造
@@ -56,16 +82,7 @@ export function generateCalendarData(posts: Post[]): CalendarData {
     if (!post?.frontmatter?.pubDate) return;
     
     try {
-      // ISO 8601形式の日時を日付のみに変換 (YYYY-MM-DD)
-      const pubDate = new Date(post.frontmatter.pubDate);
-      
-      // 無効な日付の検証
-      if (isNaN(pubDate.getTime())) {
-        console.warn(`Invalid date format: ${post.frontmatter.pubDate} for post: ${post.frontmatter.title || 'Unknown'}`);
-        return;
-      }
-      
-      const dateKey = pubDate.toISOString().split('T')[0];
+      const dateKey = getLocalDateKey(post.frontmatter.pubDate);
       
       if (!postsByDate[dateKey]) {
         postsByDate[dateKey] = {
@@ -78,7 +95,7 @@ export function generateCalendarData(posts: Post[]): CalendarData {
       postsByDate[dateKey].posts.push(post);
       validPostCount++;
     } catch (error) {
-      console.error('Date parsing error:', error, 'for post:', post.frontmatter?.title || 'Unknown');
+      console.warn(`Invalid date format: ${post.frontmatter.pubDate} for post: ${post.frontmatter.title || 'Unknown'}`);
     }
   });
   
@@ -141,7 +158,10 @@ export function generateMonthData(calendarData: CalendarData, year: number, mont
           continue;
         }
         
-        const dateKey = date.toISOString().split('T')[0];
+        const dayYear = date.getFullYear();
+        const dayMonth = String(date.getMonth() + 1).padStart(2, '0');
+        const dayDate = String(date.getDate()).padStart(2, '0');
+        const dateKey = `${dayYear}-${dayMonth}-${dayDate}`;
         const dayData = calendarData.postsByDate && calendarData.postsByDate[dateKey];
         
         monthData.push({
