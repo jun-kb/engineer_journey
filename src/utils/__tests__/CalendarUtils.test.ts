@@ -116,7 +116,7 @@ describe('generateCalendarData', () => {
     expect(result.postsByDate['2025-06-29'].count).toBe(1);
   });
 
-  test('ISO 8601以外の有効な日付形式を処理', () => {
+  test('ISO 8601形式の日付のみ処理（非ISO形式は無視）', () => {
     const dateFormatPosts: Post[] = [
       {
         frontmatter: {
@@ -137,19 +137,21 @@ describe('generateCalendarData', () => {
     ];
     
     const result = generateCalendarData(dateFormatPosts);
-    expect(result.totalPosts).toBe(2);
+    // ISO形式のみ処理されるため、totalPostsは1になる
+    expect(result.totalPosts).toBe(1);
     expect(result.activeDates).toContain('2025-06-29');
+    expect(result.activeDates.length).toBe(1);
   });
 });
 
 describe('generateMonthData', () => {
   const sampleCalendarData: CalendarData = {
     postsByDate: {
-      '2025-06-28': { count: 2, posts: [] }, // タイムゾーンでUTCに変換されると1日前になる
-      '2025-06-14': { count: 1, posts: [] }  // 同様に1日前
+      '2025-06-29': { count: 2, posts: [] }, // ローカルタイムゾーンベース
+      '2025-06-15': { count: 1, posts: [] }  // ローカルタイムゾーンベース
     },
     totalPosts: 3,
-    activeDates: ['2025-06-14', '2025-06-28']
+    activeDates: ['2025-06-15', '2025-06-29']
   };
 
   test('無効なパラメータを安全に処理', () => {
@@ -302,13 +304,13 @@ describe('intensity calculation (indirect test)', () => {
   test('投稿数に応じた適切なintensity設定', () => {
     const testData: CalendarData = {
       postsByDate: {
-        '2025-06-01': { count: 1, posts: [] }, // 6月2日分
-        '2025-06-02': { count: 2, posts: [] }, // 6月3日分
-        '2025-06-03': { count: 3, posts: [] }, // 6月4日分
-        '2025-06-04': { count: 5, posts: [] }  // 6月5日分
+        '2025-06-02': { count: 1, posts: [] }, // 6月2日分
+        '2025-06-03': { count: 2, posts: [] }, // 6月3日分
+        '2025-06-04': { count: 3, posts: [] }, // 6月4日分
+        '2025-06-05': { count: 5, posts: [] }  // 6月5日分
       },
       totalPosts: 11,
-      activeDates: ['2025-06-01', '2025-06-02', '2025-06-03', '2025-06-04']
+      activeDates: ['2025-06-02', '2025-06-03', '2025-06-04', '2025-06-05']
     };
     
     const monthResult = generateMonthData(testData, 2025, 5); // 6月
