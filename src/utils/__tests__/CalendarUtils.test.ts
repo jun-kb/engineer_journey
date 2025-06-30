@@ -7,7 +7,7 @@ import {
   getPostsForDate,
   type Post,
   type CalendarData
-} from './CalendarUtils';
+} from '../CalendarUtils';
 
 describe('generateCalendarData', () => {
   test('空の投稿配列を正常処理', () => {
