@@ -26,11 +26,18 @@ const readingTime = calculateReadingTime(content);
 			
 			<div class="meta">
 				<time datetime={frontmatter.pubDate}>
-					{new Date(frontmatter.pubDate).toLocaleDateString('ja-JP', {
-						year: 'numeric',
-						month: 'long',
-						day: 'numeric'
-					})}
+					{(() => {
+						// ISO文字列を直接パースしてローカル日付を取得
+						const isoString = frontmatter.pubDate.includes('T') ? 
+							frontmatter.pubDate.split('T')[0] : frontmatter.pubDate;
+						const [year, month, day] = isoString.split('-').map(Number);
+						const localDate = new Date(year, month - 1, day); // monthは0-based
+						return localDate.toLocaleDateString('ja-JP', {
+							year: 'numeric',
+							month: 'long',
+							day: 'numeric'
+						});
+					})()}
 				</time>
 				<span>約{readingTime}分で読めます</span>
 			</div>
